@@ -19,8 +19,10 @@ Now we need to install git, so click <a href="https://git-scm.com/download/win">
 <strong>Make sure to use this box when you have the choice.</strong>
 <img src="http://i.imgur.com/guis7EE.png"></img>
 Nice work that was probably really difficult. Go to the area you want to install the bot to. Don't make a new folder, git will make one for you! Right click inside the folder and click on the highlighted option
+
+
 <img src="http://i.imgur.com/32M4VPo.png"></img>
-Now paste this into the git bash!
+Now paste this into the git bash
 > git clone https://github.com/Discord-ian/selfbot.git discordselfbot
 After it downloads, go to the folder. Shift right click and click on this option.
 <img src="http://i.imgur.com/FCMfFwl.png"></img>
