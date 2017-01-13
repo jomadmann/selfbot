@@ -1,11 +1,39 @@
 import discord
 from discord.ext import commands
+import os
+import sys
 from time import gmtime, strftime
+from dataIO import dataIO
 bot = commands.Bot(command_prefix="=+", self_bot=True)
 away = False
 ownerid = "put your id here"
 awayreason = ""
 command__list = ['quote', 'ping', 'commands']
+userinfo = {}
+def setup_func():
+    data = {"email":"none", "id":"none", "password":"none" }
+    print("Type your email")
+    email = input("> ")
+    if "@" not in email:
+        print("That is not a vaild email.")
+        os.rmdir("data")
+        return
+    data["email"] = email
+    print("Type your password")
+    passwd = input("> ")
+    data["password"] = passwd
+    print("Input your id")
+    ownerid = input("> ")
+    data["id"] = ownerid
+    dataIO.save_json("data/userinf.json", data)
+
+def __init__():
+    if not os.path.exists("data"):
+        os.makedirs("data")
+        setup_func()
+    global userinfo
+    userinfo = dataIO.load_json("data/userinf.json")
+    ownerid = userinfo["id"]
 @bot.command(pass_context=True)
 async def away(toggle, *,reason):
     global away
@@ -61,7 +89,9 @@ async def ping():
     msg.set_author(name=bot.user.display_name, icon_url=bot.user.avatar_url)
     msg.set_footer(text='Discordian Self-Bot at {}'.format(strftime("%Y-%m-%d %H:%M:%S", gmtime())))
     await bot.say(embed=msg)
-
-
-
-bot.run('email','password', bot=False)
+if not os.path.exists("data"):
+    os.makedirs("data")
+    setup_func()
+userinfo = dataIO.load_json("data/userinf.json")
+bot.run(userinfo["email"],userinfo["password"], bot=False)
+ownerid = userinfo["id"]
