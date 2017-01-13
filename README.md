@@ -65,23 +65,6 @@ Now paste this into the git bash
 After it downloads, go to the folder. Shift right click and click on this option.
 <img src="http://i.imgur.com/FCMfFwl.png"></img>
 
-<img src="http://i.imgur.com/MUNfgBV.png"></img>
-
-
-Then all you have to do is edit the bot file with your info (at the bottom line), and go to the top and find <strong>ownerid</strong>
-go to apperance and check the highlighted box
-
-<img src="http://i.imgur.com/PlHfHFk.png"></img>
-
-once youve done that right click on your name and hit the highlighted button again
-
-<img src="http://i.imgur.com/eKoS5Q8.png"></img>
-
-now just paste that copied id into the <strong>onwerid = "id here"</strong> section!
-for example this would be mine
-
-<img src="http://i.imgur.com/ebK8yyk.png"></img>
-
 
 Now, head back to that command window and type:
 
