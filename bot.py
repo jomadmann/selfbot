@@ -93,5 +93,5 @@ if not os.path.exists("data"):
     os.makedirs("data")
     setup_func()
 userinfo = dataIO.load_json("data/userinf.json")
-bot.run(userinfo["email"],userinfo["password"], bot=False)
 ownerid = userinfo["id"]
+bot.run(userinfo["email"],userinfo["password"], bot=False)
