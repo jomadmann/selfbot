@@ -1,6 +1,32 @@
 # selfbot
 python selfbot
+<h2>FAQ</h2>
+<ul style=square>
+<li>Am I stealing your account info?</li>
+No, the bot is not connected to anything but the official discord api
+<li>How do I update?</li>
 
+> git pull
+
+<li>How do I use a command?</li>
+without [] obviously..
+
+
+
+
+Quote = [=+quote messageidhere]
+
+ping = [=+ping]
+
+commands = [=+commands]
+
+<li>How do I get a message ID????</li>
+
+Click here
+
+<img src="http://i.imgur.com/DzXRgJK.png"></img>
+
+</ul>
 
 <strong>use this command in the bot folder in git bash to update, then add your id and login info</strong>
 
