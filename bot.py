@@ -2,8 +2,8 @@ import discord
 from discord.ext import commands
 from time import gmtime, strftime
 bot = commands.Bot(command_prefix="=+", self_bot=True)
-ownerid = bot.user.id
 away = False
+ownerid = "put your id here"
 awayreason = ""
 command__list = ['quote', 'ping', 'commands']
 @bot.command(pass_context=True)
