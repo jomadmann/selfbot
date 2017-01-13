@@ -1,6 +1,12 @@
 # selfbot
 python selfbot
 
+
+<strong>use this command in the bot folder in git bash</strong>
+
+> git pull
+
+
 <h2>Installation</h2>
 <h4>Step 1 - Installing Python</h4>
 Go and head over to <a href="https://www.python.org">here</a> and download Python 3.5 <strong>Before installing make sure "ADD TO PATH" is checked!</strong>
