@@ -5,7 +5,7 @@ import asyncio
 import sys
 from time import gmtime, strftime
 from ext.dataIO import dataIO
-bot = commands.Bot(command_prefix="https://www.youtube.com/watch?v=OuTFxHM07oQ", self_bot=True)
+bot = commands.Bot(command_prefix="=+", self_bot=True)
 ownerid = "put your id here"
 awayreason = ""
 command__list = ['quote', 'ping', 'commands', 'user', 'server', 'away', 'emoji or em']
