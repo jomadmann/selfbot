@@ -10,7 +10,7 @@ ownerid = "put your id here"
 awayreason = ""
 command__list = ['quote', 'ping', 'commands', 'user', 'server', 'away', 'emoji or em']
 userinfo = {}
-emojiList = {'worlds':'【=◈︿◈=】', 'wave':'(°▽°)/','hug':'(づ ◕‿◕ )づ','owo':'(＾• ω •＾)','tabledown':'┬─┬ノ( º _ ºノ)	', 'crying':'.｡･ﾟﾟ･(＞_＜)･ﾟﾟ･｡.', 'lenny':'( ͡° ͜ʖ ͡°)'}
+emojiList = {'worlds':'【=◈︿◈=】', 'wave':'(°▽°)/','hug':'(づ ◕‿◕ )づ','owo':'(＾• ω •＾)','tabledown':'┬─┬ノ( º _ ºノ)	', 'crying':'.｡･ﾟﾟ･(＞_＜)･ﾟﾟ･｡.', 'lenny':'( ͡° ͜ʖ ͡°)', 'oh':'(ᵔ.ᵔ)','doubt':'(←_←)'}
 def setup_func():
     data = {"email":"none", "id":"none", "password":"none" }
     print("Type your email")
