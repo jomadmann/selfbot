@@ -14,7 +14,7 @@ userinfo = {}
 emojiList = {'worlds': '【=◈︿◈=】', 'wave': '(°▽°)/', 'hug': '(づ ◕‿◕ )づ', 'owo': '(＾• ω •＾)', 'tabledown': '┬─┬ノ( º _ ºノ)	',
              'crying': '.｡･ﾟﾟ･(＞_＜)･ﾟﾟ･｡.', 'lenny': '( ͡° ͜ʖ ͡°)', 'oh': '(ᵔ.ᵔ)', 'doubt': '(←_←)', 'shrug': '¯\_(ツ)_/¯', 'disapprove': 'ಠ_ಠ'}
 awaylist = []
-
+em_parse = []
 def setup_func():
     data = {"email": "none", "id": "none", "password": "none"}
     print("Type your email")
@@ -40,6 +40,9 @@ def __init__():
     global userinfo
     userinfo = dataIO.load_json("data/userinf.json")
     ownerid = userinfo["id"]
+    global em_parse
+    for em_ in emojiList:
+        em_parse.append(em)
 
 
 @bot.command(pass_context=True, hidden=True)
@@ -108,7 +111,7 @@ async def away(ctx, *, reason: str=None):
 async def quote(ctx, message_id: str=None):
     if message_id is None:
         em = discord.Embed(
-            title="Error", description="The bot encountered an error; The error is no message id found.", colour=0xFF5959)
+        title="Error", description="The bot encountered an error; The error is no message id found.", colour=0xFF5959)
         em.set_author(name=bot.user.display_name, icon_url=bot.user.avatar_url)
         # em.set_footer(set the default datetime thing ive been using)
         await bot.edit_message(ctx.message, embed=em)
@@ -124,7 +127,11 @@ async def quote(ctx, message_id: str=None):
                     await bot.edit_message(ctx.message, embed=em)
                 elif message is None:
                     print("Message with id of -{}- was not found".format(message_id))
-                    # post the embed error but altered.`
+                    em = discord.Embed(
+                    title="Error", description="The bot encountered an error. Message ID is not found.", colour=0xFF5959)
+                    em.set_author(name=bot.user.display_name, icon_url=bot.user.avatar_url)
+                    em.set_footer(
+                    text='Discordian Self-Bot at {}'.format(strftime("%Y-%m-%d %H:%M:%S", gmtime())))
 
 @bot.command(pass_context=True)
 async def commands(ctx):
@@ -150,6 +157,11 @@ async def on_ready():
 async def on_message(message):
     global awaylist
     if message.author.id == ownerid:
+        if em_parse in message.content.lower():
+            await bot.edit_message(message,
+            #check if there is an emoji in the message only by the author
+            #if there is then show the emoji linked to the message
+            #the issue is that it has to be at the front of the message or else it could cause chaos.
         await bot.process_commands(message)
     elif away:
         if message.channel.type.name is "private":
