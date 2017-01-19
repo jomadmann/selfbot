@@ -157,13 +157,10 @@ async def on_ready():
 async def on_message(message):
     global awaylist
     if message.author.id == ownerid:
-        if em_parse in message.content.lower():
-            await bot.edit_message(message,
             #check if there is an emoji in the message only by the author
             #if there is then show the emoji linked to the message
             #the issue is that it has to be at the front of the message or else it could cause chaos.
         await bot.process_commands(message)
-    elif away:
         if message.channel.type.name is "private":
             if message.author.id in awaylist:
                 return
