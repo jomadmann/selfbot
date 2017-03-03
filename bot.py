@@ -14,7 +14,6 @@ userinfo = {}
 emojiList = {'worlds': '【=◈︿◈=】', 'wave': '(°▽°)/', 'hug': '(づ ◕‿◕ )づ', 'owo': '(＾• ω •＾)', 'tabledown': '┬─┬ノ( º _ ºノ)	',
              'crying': '.｡･ﾟﾟ･(＞_＜)･ﾟﾟ･｡.', 'lenny': '( ͡° ͜ʖ ͡°)', 'oh': '(ᵔ.ᵔ)', 'doubt': '(←_←)', 'shrug': '¯\_(ツ)_/¯', 'disapprove': 'ಠ_ಠ'}
 awaylist = []
-
 def setup_func():
     data = {"email": "none", "id": "none", "password": "none"}
     print("Type your email")
@@ -31,8 +30,6 @@ def setup_func():
     ownerid = input("> ")
     data["id"] = ownerid
     dataIO.save_json("data/userinf.json", data)
-
-
 def __init__():
     if not os.path.exists("data"):
         os.makedirs("data")
@@ -40,8 +37,6 @@ def __init__():
     global userinfo
     userinfo = dataIO.load_json("data/userinf.json")
     ownerid = userinfo["id"]
-
-
 @bot.command(pass_context=True, hidden=True)
 async def debug(ctx, *, code):
     """Evaluates code
@@ -69,14 +64,10 @@ async def debug(ctx, *, code):
             result = python.format(result)
 
             await bot.edit_message(ctx.message, result)
-
-
 @bot.command(pass_context=True, name="emoji", aliases=["em"])
 async def emoji__command(ctx, *, emoji):
     if emoji in emojiList:
         await bot.edit_message(ctx.message, emojiList[emoji])
-
-
 @bot.command(pass_context=True, name="emojilist")
 async def listemojis(ctx):
     emlist = "Emojis are:\n"
@@ -85,8 +76,6 @@ async def listemojis(ctx):
     em = discord.Embed(title="Emoji List", description=emlist, colour=0x1D84B9)
     em.set_author(name=bot.user.display_name, icon_url=bot.user.avatar_url)
     await bot.edit_message(ctx.message, embed=em)
-
-
 @bot.command(pass_context=True)
 async def away(ctx, *, reason: str=None):
     global awayreason
@@ -102,8 +91,6 @@ async def away(ctx, *, reason: str=None):
     else:
         away = True
         await bot.edit_message(ctx.message, embed=discord.Embed(title="Update Status", description="Alright, you are away!", colour=0x00FF99))
-
-
 @bot.command(pass_context=True)
 async def quote(ctx, message_id: str=None):
     if message_id is None:
@@ -135,21 +122,22 @@ async def commands(ctx):
                        description=cmdlist, colour=0x1D84B9)
     em.set_author(name=bot.user.display_name, icon_url=bot.user.avatar_url)
     await bot.edit_message(ctx.message, embed=em)
-
-
 @bot.event
 async def on_ready():
     print("--" * 5)
     print("Logged in as")
     print(bot.user.id)
     print("client starting...")
+    print("")
     print("--" * 5)
-
-
 @bot.event
 async def on_message(message):
     global awaylist
     if message.author.id == ownerid:
+        if message.lower.startswith == [x for x in emojiList]:
+            for emoji in emojiList:
+                if message.lower.startswith == emoji:
+                    await bot.edit_message(ctx.message,emoji)
         await bot.process_commands(message)
     elif away:
         if message.channel.type.name is "private":
@@ -164,8 +152,6 @@ async def on_message(message):
             await bot.send_message(message.channel, embed=discord.Embed(title="I'm Away!", description=awayreason, colour=0x1D84B9))
     else:
         return
-
-
 @bot.command(pass_context=True)
 async def ping(ctx):
     msg = discord.Embed(title='Pong!', colour=0x66CC99)
