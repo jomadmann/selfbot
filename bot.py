@@ -134,10 +134,10 @@ async def on_ready():
 async def on_message(message):
     global awaylist
     if message.author.id == ownerid:
-        if message.lower.startswith == [x for x in emojiList]:
+        if message.content.startswith(tuple([x for x in emojiList])):
             for emoji in emojiList:
-                if message.lower.startswith == emoji:
-                    await bot.edit_message(ctx.message,emoji)
+                if message.content.startswith(emoji):
+                    await bot.edit_message(message,emojiList[emoji])
         await bot.process_commands(message)
     elif away:
         if message.channel.type.name is "private":
