@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -546,3 +547,11 @@
   </body>
 </html>
 
+=======
+#!/bin/sh
+echo Updating self-bot
+git pull
+echo OK, lets go!
+python bot.py
+pause
+>>>>>>> e529e393664d0f454c83e830cdf7c10261b54525
