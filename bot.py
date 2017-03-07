@@ -9,10 +9,9 @@ bot = commands.Bot(command_prefix="=+", self_bot=True)
 ownerid = "none"
 awayreason = ""
 command__list = ['quote', 'ping', 'commands',
-                 'user', 'server', 'away', 'emoji or em']
+                 'user', 'server', 'away', 'emoji','em']
 userinfo = {}
-emojiList = {'worlds': '【=◈︿◈=】', 'wave': '(°▽°)/', 'hug': '(づ ◕‿◕ )づ', 'owo': '(＾• ω •＾)', 'tabledown': '┬─┬ノ( º _ ºノ)	',
-             'crying': '.｡･ﾟﾟ･(＞_＜)･ﾟﾟ･｡.', 'lenny': '( ͡° ͜ʖ ͡°)', 'oh': '(ᵔ.ᵔ)', 'doubt': '(←_←)', 'shrug': '¯\_(ツ)_/¯', 'disapprove': 'ಠ_ಠ'}
+emojiList = {}
 awaylist = []
 def setup_func():
     data = {"email": "none", "id": "none", "password": "none"}
@@ -37,6 +36,12 @@ def __init__():
     global userinfo
     userinfo = dataIO.load_json("data/userinf.json")
     ownerid = userinfo["id"]
+    global emojiList
+    emojiList = dataIO.load_json("data/emojilist.json")
+    if emojiList is None:
+        emojiList = {'worlds': '【=◈︿◈=】', 'wave': '(°▽°)/', 'hug': '(づ ◕‿◕ )づ', 'owo': '(＾• ω •＾)', 'tabledown': '┬─┬ノ( º _ ºノ)	',
+                     'crying': '.｡･ﾟﾟ･(＞_＜)･ﾟﾟ･｡.', 'lenny': '( ͡° ͜ʖ ͡°)', 'oh': '(ᵔ.ᵔ)', 'doubt': '(←_←)', 'shrug': '¯\_(ツ)_/¯', 'disapprove': 'ಠ_ಠ'}
+        dataIO.save_json("data/emojilist.json",emojiList)
 @bot.command(pass_context=True, hidden=True)
 async def debug(ctx, *, code):
     """Evaluates code
@@ -64,8 +69,30 @@ async def debug(ctx, *, code):
             result = python.format(result)
 
             await bot.edit_message(ctx.message, result)
-@bot.command(pass_context=True, name="emoji", aliases=["em"])
+@bot.group(pass_context=True,name="emoji")
+async def emoji_group(ctx):
+    """manages emoji like removing them and adding them."""
+    if ctx.invoked_subcommand is None:
+        await bot.edit_message(ctx.message, "You need to type `=+help emoji`")
+@emoji_group.command(pass_context=True,name="add")
+async def add_emoji(ctx, emojiName,*, emoji):
+    """Add an emoji to the bot's list of emojis."""
+    global emojiList
+    if emoji is None:
+        em = discord.Embed(
+            title="Error", description="The bot encountered an error; The error is no emoji found", colour=0xFF5959)
+        em.set_author(name=bot.user.display_name, icon_url=bot.user.avatar_url)
+        # em.set_footer(set the default datetime thing ive been using)
+        await bot.edit_message(ctx.message, embed=em)
+        return
+    emojiList[emojiName] = emoji
+    dataIO.save_json("data/emojilist.json",emojiList)
+    await bot.edit_message(ctx.message, "Added emoji {} with value of {} to the bot, testing in 5 seconds.".format(emojiName,emoji))
+    asyncio.sleep(5)
+    await bot.say(emojiList[emojiName])
+@bot.command(pass_context=True, name="em")
 async def emoji__command(ctx, *, emoji):
+    """type the emojiname in the emoji slot, if you dont know what the emojis are, then use **emojilist*"""
     if emoji in emojiList:
         await bot.edit_message(ctx.message, emojiList[emoji])
 @bot.command(pass_context=True, name="emojilist")
@@ -128,7 +155,7 @@ async def on_ready():
     print("Logged in as")
     print(bot.user.id)
     print("client starting...")
-    print("")
+    print("The prefix is " + bot.command_prefix)
     print("--" * 5)
 @bot.event
 async def on_message(message):
